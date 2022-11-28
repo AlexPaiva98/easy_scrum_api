@@ -9,7 +9,6 @@ import javax.validation.constraints.Size;
 import br.ufrn.imd.springcrud.model.AbstractModel;
 
 @Entity
-@Table(name = "person")
 public class PersonModel extends AbstractModel {
     @NotBlank
     private String name;

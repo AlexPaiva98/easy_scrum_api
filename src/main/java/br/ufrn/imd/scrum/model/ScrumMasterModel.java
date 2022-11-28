@@ -5,13 +5,11 @@ import br.ufrn.imd.springcrud.model.AbstractModel;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "scrum_master")
 public class ScrumMasterModel extends AbstractModel {
     @ManyToOne
-    @JoinColumn(name = "person_id", nullable = false)
+    @JoinColumn(nullable = false)
     private PersonModel person;
 
     public ScrumMasterModel() {

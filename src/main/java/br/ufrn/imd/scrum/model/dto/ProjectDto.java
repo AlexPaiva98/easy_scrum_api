@@ -4,6 +4,8 @@ import br.ufrn.imd.scrum.model.enumerate.StatusProjectEnum;
 import br.ufrn.imd.springcrud.model.dto.AbstractDto;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ProjectDto extends AbstractDto {
     private String name;
@@ -13,6 +15,7 @@ public class ProjectDto extends AbstractDto {
     private ProductOwnerDto productOwner;
     private ScrumMasterDto scrumMaster;
     private ProductBacklogDto productBacklog;
+    private Set<DevTeamDto> teams;
     private String logo;
     private String description;
 
@@ -24,11 +27,12 @@ public class ProjectDto extends AbstractDto {
         this.setProductOwner(new ProductOwnerDto());
         this.setScrumMaster(new ScrumMasterDto());
         this.setProductBacklog(new ProductBacklogDto());
+        this.setTeams(new HashSet<DevTeamDto>());
         this.setLogo("");
         this.setDescription("");
     }
 
-    public ProjectDto(Long id, String name, Date startDate, Date deadline, StatusProjectEnum status, ProductOwnerDto productOwner, ScrumMasterDto scrumMaster, ProductBacklogDto productBacklog, String logo, String description) {
+    public ProjectDto(Long id, String name, Date startDate, Date deadline, StatusProjectEnum status, ProductOwnerDto productOwner, ScrumMasterDto scrumMaster, ProductBacklogDto productBacklog, Set<DevTeamDto> teams, String logo, String description) {
         super(id);
         this.setName(name);
         this.setStartDate(startDate);
@@ -37,6 +41,7 @@ public class ProjectDto extends AbstractDto {
         this.setProductOwner(productOwner);
         this.setScrumMaster(scrumMaster);
         this.setProductBacklog(productBacklog);
+        this.setTeams(teams);
         this.setLogo(logo);
         this.setDescription(description);
     }
@@ -95,6 +100,14 @@ public class ProjectDto extends AbstractDto {
 
     public void setProductBacklog(ProductBacklogDto productBacklog) {
         this.productBacklog = productBacklog;
+    }
+
+    public Set<DevTeamDto> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(Set<DevTeamDto> teams) {
+        this.teams = teams;
     }
 
     public String getLogo() {

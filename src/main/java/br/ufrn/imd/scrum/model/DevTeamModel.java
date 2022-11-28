@@ -10,15 +10,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "dev_team")
 public class DevTeamModel extends AbstractModel {
     @NotBlank
     private String surname;
     @ManyToOne
-    @JoinColumn(name = "project_id", nullable = false)
+    @JoinColumn(nullable = false)
     private ProjectModel project;
     @ManyToMany
-    @JoinTable(name = "dev_team_participant", joinColumns = {@JoinColumn(name = "participant_id") }, inverseJoinColumns = { @JoinColumn(name = "dev_team_id") })
+    @JoinTable
     private Set<ParticipantModel> participants;
 
     public DevTeamModel() {

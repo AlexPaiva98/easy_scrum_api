@@ -82,6 +82,20 @@ public class FilterMeetingsByProjectService implements FilterService<MeetingDto>
                 exceptionHelper.add("invalid projectId parameter value");
             }
         }
+        if (!parameters.containsKey("limit")) {
+            exceptionHelper.add("there is no parameter limit");
+        } else {
+            if (Integer.valueOf(parameters.get("limit")) < 1) {
+                exceptionHelper.add("limit must be more than 0");
+            }
+        }
+        if (!parameters.containsKey("page")) {
+            exceptionHelper.add("there is no parameter limit");
+        } else {
+            if (Integer.valueOf(parameters.get("limit")) < 0) {
+                exceptionHelper.add("limit must be more than -1");
+            }
+        }
         /* Check error */
         if (!exceptionHelper.isEmpty()) {
             throw new ValidationException(exceptionHelper.getMessage());
@@ -90,6 +104,11 @@ public class FilterMeetingsByProjectService implements FilterService<MeetingDto>
 
     @Override
     public Collection<MeetingDto> filter(Map<String, String> parameters) {
-        return this.getMeetingService().convertToDTOList(this.getMeetingService().getMeetingsByProject(Long.valueOf(parameters.get("personId")), Long.valueOf(parameters.get("projectId"))));
+        return this.getMeetingService().convertToDTOList(
+                this.getMeetingService().getMeetingsByProject(
+                        Long.valueOf(parameters.get("personId")),
+                        Long.valueOf(parameters.get("projectId")),
+                        Integer.valueOf(parameters.get("limit")),
+                        Integer.valueOf(parameters.get("page"))));
     }
 }

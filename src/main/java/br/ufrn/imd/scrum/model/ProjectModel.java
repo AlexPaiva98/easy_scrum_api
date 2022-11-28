@@ -9,28 +9,32 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "project")
 public class ProjectModel extends AbstractModel {
     @NotBlank
     private String name;
     @NotNull
-    @Column(name = "start_date")
+    @Column
     private Date startDate;
     @NotNull
     private Date deadline;
     @NotNull
     private StatusProjectEnum status;
     @ManyToOne
-    @JoinColumn(name = "product_owner_id", nullable = false)
+    @JoinColumn(nullable = false)
     private ProductOwnerModel productOwner;
     @ManyToOne
-    @JoinColumn(name = "scrum_master_id", nullable = false)
+    @JoinColumn(nullable = false)
     private ScrumMasterModel scrumMaster;
     @OneToOne
-    @JoinColumn(name = "product_backlog_id", nullable = false)
+    @JoinColumn(nullable = false)
     private ProductBacklogModel productBacklog;
+    @OneToMany
+    @JoinColumn(nullable = false)
+    private Set<DevTeamModel> teams;
     private String logo;
     private String description;
 
@@ -42,11 +46,12 @@ public class ProjectModel extends AbstractModel {
         this.setProductOwner(new ProductOwnerModel());
         this.setScrumMaster(new ScrumMasterModel());
         this.setProductBacklog(new ProductBacklogModel());
+        this.setTeams(new HashSet<DevTeamModel>());
         this.setLogo("");
         this.setDescription("");
     }
 
-    public ProjectModel(String name, Date startDate, Date deadline, StatusProjectEnum status, ProductOwnerModel productOwner, ScrumMasterModel scrumMaster, ProductBacklogModel productBacklog, String logo, String description) {
+    public ProjectModel(String name, Date startDate, Date deadline, StatusProjectEnum status, ProductOwnerModel productOwner, ScrumMasterModel scrumMaster, ProductBacklogModel productBacklog, Set<DevTeamModel> teams, String logo, String description) {
         this.setName(name);
         this.setStartDate(startDate);
         this.setDeadline(deadline);
@@ -54,6 +59,7 @@ public class ProjectModel extends AbstractModel {
         this.setProductOwner(productOwner);
         this.setScrumMaster(scrumMaster);
         this.setProductBacklog(productBacklog);
+        this.setTeams(teams);
         this.setLogo(logo);
         this.setDescription(description);
     }
@@ -112,6 +118,14 @@ public class ProjectModel extends AbstractModel {
 
     public void setProductBacklog(ProductBacklogModel productBacklog) {
         this.productBacklog = productBacklog;
+    }
+
+    public Set<DevTeamModel> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(Set<DevTeamModel> teams) {
+        this.teams = teams;
     }
 
     public String getLogo() {
