@@ -12,19 +12,18 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "sprint")
 public class SprintModel extends AbstractModel {
     @NotNull
     @Size(min = 7)
     private Integer duration;
     @NotNull
-    @Column(name = "start_date")
+    @Column
     private Date startDate;
     @NotNull
-    @Column(name = "end_date")
+    @Column
     private Date endDate;
     @ManyToMany
-    @JoinTable(name = "sprint_activity", joinColumns = {@JoinColumn(name = "activity_id") }, inverseJoinColumns = { @JoinColumn(name = "sprint_id") })
+    @JoinTable
     private Set<ActivityModel> activities;
 
     public SprintModel() {

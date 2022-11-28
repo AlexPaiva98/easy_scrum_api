@@ -13,19 +13,18 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "meeting")
 public class MeetingModel extends AbstractModel {
     @NotBlank
     private String link;
     @NotNull
     private Date datetime;
     @ManyToOne
-    @JoinColumn(name = "project_id", nullable = false)
+    @JoinColumn(nullable = false)
     private ProjectModel project;
     @NotNull
     private CategoryMeetingEnum category;
-    @OneToMany
-    @JoinColumn(name = "guest_id")
+    @OneToMany(cascade=CascadeType.PERSIST)
+    @JoinColumn
     private Set<GuestModel> guests;
     private String description;
 

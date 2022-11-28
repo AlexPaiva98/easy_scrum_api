@@ -72,8 +72,8 @@ public class MeetingService extends GenericService<MeetingModel, MeetingDto> {
                     exceptionHelper.add("project not found (id = "+ meetingDto.getProject().getId() + ")");
                 }
             }
-            if (meetingDto.getGuests().isEmpty() == false) {
-                exceptionHelper.add("cannot invite in meeting registration");
+            if (meetingDto.getGuests().isEmpty()) {
+                exceptionHelper.add("invalid guests");
             }
             if (meetingDto.getCategory() == null) {
                 exceptionHelper.add("invalid category");
@@ -99,8 +99,8 @@ public class MeetingService extends GenericService<MeetingModel, MeetingDto> {
         return this.convertToDTOList(this.meetingRepository.findByGuests_Person_IdAndActiveTrueOrderByDatetimeDesc(personId, PageRequest.of(pg, lim)));
     }
 
-    public List<MeetingModel> getMeetingsByProject(Long personId, Long projectId) {
-        return this.meetingRepository.findByGuests_Person_IdAndProject_IdAndActiveTrueOrderByDatetimeDesc(personId, projectId);
+    public List<MeetingModel> getMeetingsByProject(Long personId, Long projectId, Integer lim, Integer pg) {
+        return this.meetingRepository.findByGuests_Person_IdAndProject_IdAndActiveTrueOrderByDatetimeDesc(personId, projectId, PageRequest.of(pg, lim));
     }
 
     public Collection<MeetingDto> getMeetingsByTodayDate(Long personId) throws ValidationException {

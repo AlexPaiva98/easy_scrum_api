@@ -5,20 +5,17 @@ import br.ufrn.imd.springcrud.model.dto.AbstractDto;
 
 public class GuestDto extends AbstractDto {
     private PersonDto person;
-    private MeetingDto meeting;
     private CategoryGuestEnum category;
 
     public GuestDto() {
         super();
         this.setPerson(new PersonDto());
-        this.setMeeting(new MeetingDto());
         this.setCategory(CategoryGuestEnum.DEFAULT);
     }
 
-    public GuestDto(Long id, PersonDto person, MeetingDto meeting, CategoryGuestEnum category) {
+    public GuestDto(Long id, PersonDto person, CategoryGuestEnum category) {
         super(id);
         this.setPerson(person);
-        this.setMeeting(meeting);
         this.setCategory(category);
     }
 
@@ -28,14 +25,6 @@ public class GuestDto extends AbstractDto {
 
     public void setPerson(PersonDto person) {
         this.person = person;
-    }
-
-    public MeetingDto getMeeting() {
-        return meeting;
-    }
-
-    public void setMeeting(MeetingDto meeting) {
-        this.meeting = meeting;
     }
 
     public CategoryGuestEnum getCategory() {

@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface MeetingRepository extends GenericRepository<MeetingModel> {
-    List<MeetingModel> findByGuests_Person_IdAndProject_IdAndActiveTrueOrderByDatetimeDesc(Long id, Long id1);
+    List<MeetingModel> findByGuests_Person_IdAndProject_IdAndActiveTrueOrderByDatetimeDesc(Long id, Long id1, Pageable pageable);
 
     List<MeetingModel> findByGuests_Person_IdAndActiveTrueAndDatetimeBetweenOrderByDatetimeAsc(Long id, Date datetimeStart, Date datetimeEnd);
 

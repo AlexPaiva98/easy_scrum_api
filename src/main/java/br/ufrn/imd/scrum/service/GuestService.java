@@ -61,15 +61,6 @@ public class GuestService extends GenericService<GuestModel, GuestDto> {
                     exceptionHelper.add("person not found (id = "+ guestDto.getPerson().getId() + ")");
                 }
             }
-            if (guestDto.getMeeting() == null) {
-                exceptionHelper.add("invalid meeting");
-            } else {
-                try{
-                    this.getMeetingService().findById(guestDto.getMeeting().getId());
-                } catch (EntityNotFoundException entityNotFoundException) {
-                    exceptionHelper.add("meeting not found (id = "+ guestDto.getMeeting().getId() + ")");
-                }
-            }
             if (guestDto.getCategory() == null) {
                 exceptionHelper.add("invalid category");
             }

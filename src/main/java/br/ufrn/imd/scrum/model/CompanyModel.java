@@ -4,12 +4,10 @@ import br.ufrn.imd.springcrud.model.AbstractModel;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "company")
 public class CompanyModel extends AbstractModel {
     @NotBlank
     @Column(unique = true)

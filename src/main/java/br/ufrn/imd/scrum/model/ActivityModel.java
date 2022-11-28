@@ -5,19 +5,17 @@ import br.ufrn.imd.springcrud.model.AbstractModel;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "activity")
 public class ActivityModel extends AbstractModel {
     @ManyToOne
-    @JoinColumn(name = "project_id", nullable = false)
+    @JoinColumn(nullable = false)
     private ProjectModel project;
     @ManyToOne
-    @JoinColumn(name = "user_storie_id", nullable = false)
+    @JoinColumn(nullable = false)
     private UserStorieModel userStorie;
     @ManyToOne
-    @JoinColumn(name = "developer_id", nullable = false)
+    @JoinColumn(nullable = false)
     private DeveloperModel responsible;
 
     public ActivityModel() {

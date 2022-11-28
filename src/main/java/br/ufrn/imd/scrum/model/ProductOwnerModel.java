@@ -5,13 +5,12 @@ import br.ufrn.imd.springcrud.model.AbstractModel;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "product_owner")
 public class ProductOwnerModel extends AbstractModel {
     @ManyToOne
-    @JoinColumn(name = "person_id", nullable = false)
+    @JoinColumn(nullable = false)
     private PersonModel person;
     @ManyToOne
-    @JoinColumn(name = "company_id", nullable = false)
+    @JoinColumn(nullable = false)
     private CompanyModel company;
 
     public ProductOwnerModel() {
