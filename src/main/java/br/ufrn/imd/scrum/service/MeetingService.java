@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -103,6 +104,18 @@ public class MeetingService extends GenericService<MeetingModel, MeetingDto> {
         return this.meetingRepository.findByGuests_Person_IdAndProject_IdAndActiveTrueOrderByDatetimeDesc(personId, projectId, PageRequest.of(pg, lim));
     }
 
+    private Date getYesterday() {
+        final Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -1);
+        return cal.getTime();
+    }
+
+    private Date getTomorrow() {
+        final Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, +1);
+        return cal.getTime();
+    }
+
     public Collection<MeetingDto> getMeetingsByTodayDate(Long personId) throws ValidationException {
         ExceptionHelper exceptionHelper = new ExceptionHelper();
         try {
@@ -114,6 +127,6 @@ public class MeetingService extends GenericService<MeetingModel, MeetingDto> {
         if (!exceptionHelper.isEmpty()) {
             throw new ValidationException(exceptionHelper.getMessage());
         }
-        return this.convertToDTOList(this.meetingRepository.findByGuests_Person_IdAndActiveTrueAndDatetimeBetweenOrderByDatetimeAsc(personId, new Date(), new Date()));
+        return this.convertToDTOList(this.meetingRepository.findByGuests_Person_IdAndActiveTrueAndDatetimeBetweenOrderByDatetimeAsc(personId, this.getYesterday(), this.getTomorrow()));
     }
 }
