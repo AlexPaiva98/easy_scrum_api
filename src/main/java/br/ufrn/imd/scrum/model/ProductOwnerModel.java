@@ -6,10 +6,10 @@ import javax.persistence.*;
 
 @Entity
 public class ProductOwnerModel extends AbstractModel {
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(nullable = false)
     private PersonModel person;
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(nullable = false)
     private CompanyModel company;
 
