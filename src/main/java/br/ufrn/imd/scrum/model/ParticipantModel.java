@@ -3,6 +3,7 @@ package br.ufrn.imd.scrum.model;
 import br.ufrn.imd.scrum.model.enumerate.StatusParticipantEnum;
 import br.ufrn.imd.springcrud.model.AbstractModel;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -11,7 +12,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 public class ParticipantModel extends AbstractModel {
-    @ManyToOne
+    @ManyToOne(cascade= CascadeType.PERSIST)
     @JoinColumn(nullable = false)
     private DeveloperModel developer;
     @NotNull

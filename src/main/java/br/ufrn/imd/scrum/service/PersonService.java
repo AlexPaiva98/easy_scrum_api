@@ -130,6 +130,12 @@ public class PersonService extends GenericService<PersonModel, PersonDto> {
         return p;
     }
 
+    public PersonDto findByNickname(String nickname) {
+        PersonDto person = this.convertToDto(this.personRepository.findByNickname(nickname));
+        person.setPassword("");
+        return person;
+    }
+
     @Override
     protected void validateDto(ValidationTypeUtil validationTypeUtil, PersonDto dto) throws ValidationException {
         ExceptionHelper exceptionHelper = new ExceptionHelper();

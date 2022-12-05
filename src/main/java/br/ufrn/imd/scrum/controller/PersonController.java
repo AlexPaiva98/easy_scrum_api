@@ -50,4 +50,9 @@ public class PersonController extends GenericController<PersonModel, PersonDto> 
     public ResponseEntity<?> passwordChange(@RequestParam("email") String email, @RequestParam("newPassword") String newPassword) throws ValidationException {
         return ResponseEntity.ok(this.personService.passwordChange(email, newPassword));
     }
+
+    @GetMapping({"nickname"})
+    public ResponseEntity<PersonDto> findByNickname(@RequestParam("nickname") String nickname) {
+        return ResponseEntity.ok(this.personService.findByNickname(nickname));
+    }
 }
