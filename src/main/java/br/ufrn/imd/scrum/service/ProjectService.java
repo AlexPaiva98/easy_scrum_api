@@ -61,6 +61,6 @@ public class ProjectService extends GenericService<ProjectModel, ProjectDto> {
         if (!exceptionHelper.isEmpty()) {
             throw new ValidationException(exceptionHelper.getMessage());
         }
-        return this.convertToDTOList(this.projectRepository.findByTeams_Participants_Developer_Person_IdOrProductOwner_Person_IdOrScrumMaster_Person_IdOrderByNameAsc(personId, personId, personId));
+        return this.convertToDTOList(this.projectRepository.findByActiveTrueAndScrumMaster_Person_IdOrTeams_Participants_Developer_Person_IdOrderByNameAsc(personId, personId));
     }
 }

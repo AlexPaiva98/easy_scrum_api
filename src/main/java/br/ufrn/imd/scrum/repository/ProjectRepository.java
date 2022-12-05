@@ -9,5 +9,7 @@ import java.util.List;
 
 @Repository
 public interface ProjectRepository extends GenericRepository<ProjectModel> {
-    List<ProjectModel> findByTeams_Participants_Developer_Person_IdOrProductOwner_Person_IdOrScrumMaster_Person_IdOrderByNameAsc(Long id, Long id1, Long id2);
+
+    List<ProjectModel> findByActiveTrueAndScrumMaster_Person_IdOrTeams_Participants_Developer_Person_IdOrderByNameAsc(Long id, Long id1);
+    
 }

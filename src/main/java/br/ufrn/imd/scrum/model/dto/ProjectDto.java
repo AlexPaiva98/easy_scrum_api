@@ -12,7 +12,7 @@ public class ProjectDto extends AbstractDto {
     private Date startDate;
     private Date deadline;
     private StatusProjectEnum status;
-    private ProductOwnerDto productOwner;
+    private String productOwner;
     private ScrumMasterDto scrumMaster;
     private ProductBacklogDto productBacklog;
     private Set<DevTeamDto> teams;
@@ -24,7 +24,7 @@ public class ProjectDto extends AbstractDto {
         this.setStartDate(new Date());
         this.setDeadline(new Date());
         this.setStatus(StatusProjectEnum.CREATED);
-        this.setProductOwner(new ProductOwnerDto());
+        this.setProductOwner("");
         this.setScrumMaster(new ScrumMasterDto());
         this.setProductBacklog(new ProductBacklogDto());
         this.setTeams(new HashSet<DevTeamDto>());
@@ -32,7 +32,7 @@ public class ProjectDto extends AbstractDto {
         this.setDescription("");
     }
 
-    public ProjectDto(Long id, String name, Date startDate, Date deadline, StatusProjectEnum status, ProductOwnerDto productOwner, ScrumMasterDto scrumMaster, ProductBacklogDto productBacklog, Set<DevTeamDto> teams, String logo, String description) {
+    public ProjectDto(Long id, String name, Date startDate, Date deadline, StatusProjectEnum status, String productOwner, ScrumMasterDto scrumMaster, ProductBacklogDto productBacklog, Set<DevTeamDto> teams, String logo, String description) {
         super(id);
         this.setName(name);
         this.setStartDate(startDate);
@@ -78,11 +78,11 @@ public class ProjectDto extends AbstractDto {
         this.status = status;
     }
 
-    public ProductOwnerDto getProductOwner() {
+    public String getProductOwner() {
         return productOwner;
     }
 
-    public void setProductOwner(ProductOwnerDto productOwner) {
+    public void setProductOwner(String productOwner) {
         this.productOwner = productOwner;
     }
 

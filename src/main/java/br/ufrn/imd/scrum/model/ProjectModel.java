@@ -23,13 +23,12 @@ public class ProjectModel extends AbstractModel {
     private Date deadline;
     @NotNull
     private StatusProjectEnum status;
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    private ProductOwnerModel productOwner;
-    @ManyToOne
+    @NotBlank
+    private String productOwner;
+    @ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(nullable = false)
     private ScrumMasterModel scrumMaster;
-    @OneToOne
+    @OneToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(nullable = false)
     private ProductBacklogModel productBacklog;
     @OneToMany
@@ -43,7 +42,7 @@ public class ProjectModel extends AbstractModel {
         this.setStartDate(new Date());
         this.setDeadline(new Date());
         this.setStatus(StatusProjectEnum.DEFAULT);
-        this.setProductOwner(new ProductOwnerModel());
+        this.setProductOwner("");
         this.setScrumMaster(new ScrumMasterModel());
         this.setProductBacklog(new ProductBacklogModel());
         this.setTeams(new HashSet<DevTeamModel>());
@@ -51,7 +50,7 @@ public class ProjectModel extends AbstractModel {
         this.setDescription("");
     }
 
-    public ProjectModel(String name, Date startDate, Date deadline, StatusProjectEnum status, ProductOwnerModel productOwner, ScrumMasterModel scrumMaster, ProductBacklogModel productBacklog, Set<DevTeamModel> teams, String logo, String description) {
+    public ProjectModel(String name, Date startDate, Date deadline, StatusProjectEnum status, String productOwner, ScrumMasterModel scrumMaster, ProductBacklogModel productBacklog, Set<DevTeamModel> teams, String logo, String description) {
         this.setName(name);
         this.setStartDate(startDate);
         this.setDeadline(deadline);
@@ -96,11 +95,11 @@ public class ProjectModel extends AbstractModel {
         this.status = status;
     }
 
-    public ProductOwnerModel getProductOwner() {
+    public String getProductOwner() {
         return productOwner;
     }
 
-    public void setProductOwner(ProductOwnerModel productOwner) {
+    public void setProductOwner(String productOwner) {
         this.productOwner = productOwner;
     }
 
